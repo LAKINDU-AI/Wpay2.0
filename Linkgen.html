@@ -1,0 +1,80 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Payment</title>
+</head>
+<body>
+
+<h1>Make a Payment</h1>
+
+<form id="paymentForm" action="payment-processing-page" method="post">
+     Replace these values with actual data from your payment gateway 
+    <input type="hidden" name="merchant_id" value="your_merchant_id">
+    <input type="hidden" name="amount" value="100.00">
+    <input type="hidden" name="currency" value="USD">
+    <input type="hidden" name="order_id" value="your_order_id">
+    <input type="hidden" name="description" value="Payment for Product/Service">
+    <input type="hidden" name="return_url" value="https://yourwebsite.com/success">
+    <input type="hidden" name="cancel_url" value="https://yourwebsite.com/cancel">
+    <input type="hidden" name="notify_url" value="https://yourwebsite.com/notify">
+
+    <!-- Add additional fields as required by your payment gateway 
+
+    <button type="submit">Proceed to Payment</button>
+</form>
+
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Link Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Random Link Generator</h1>
+
+<p>Click the button to generate a random link:</p>
+
+<button onclick="generateRandomLink()">Generate Link</button>
+
+<p id="randomLink"></p>
+
+<script>
+    function generateRandomLink() {
+        // Array of example links
+        var links = [
+            "https://example1.com",
+            "https://example2.com",
+            "https://example3.com",
+            // Add more links as needed
+        ];
+
+        // Get a random index from the array
+        var randomIndex = Math.floor(Math.random() * links.length);
+
+        // Get the random link
+        var randomLink = links[randomIndex];
+
+        // Display the random link
+        document.getElementById("randomLink").innerHTML = '<a href="' + randomLink + '" target="_blank">' + randomLink + '</a>';
+    }
+</script>
+
+</body>
+</html>

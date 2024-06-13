@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<head>
+	<title>Submit your issue/feedback</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+		}
+
+		.container {
+			max-width: 600px;
+			margin: 0 auto;
+			padding: 20px;
+			border: 1px solid #ccc;
+			box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+		}
+
+		.form-group {
+			margin-bottom: 20px;
+		}
+
+		label {
+			display: block;
+			margin-bottom: 5px;
+		}
+
+		input[type="text"],
+		input[type="textarea"],
+		input[type="number"] {
+			width: 100%;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		select {
+			width: 100%;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		button {
+			background-color: #4CAF50;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			display: block;
+			margin: 0 auto;
+		}
+
+		button:hover {
+			background-color: #45a049;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Submit your issue/feedback</h1>
+		<form id="feedback-form">
+			<div class="form-group">
+				<label for="reg-id-number">Reg / ID Number:</label>
+				<input type="text" id="reg-id-number" name="reg-id-number">
+			</div>
+			<div class="form-group">
+				<label for="name">Name:</label>
+				<input type="text" id="name" name="name">
+			</div>
+			<div class="form-group">
+				<label for="title">Title:</label>
+				<input type="text" id="title" name="title">
+			</div>
+			<div class="form-group">
+				<label for="description">Description:</label>
+				<input type="textarea" id="description" name="description">
+			</div>
+			</div>
+			<button type="submit">Submit</button>
+		</form>
+	</div>
+	<script>
+		const form = document.getElementById('feedback-form');
+
+		form.addEventListener('submit', (e) => {
+			e.preventDefault();
+
+			const regIdNumber = document.getElementById('reg-id-number').value;
+			const name = document.getElementById('name').value;
+			const title = document.getElementById('title').value;
+			const description = document.getElementById('description').value;
+
+			if (!regIdNumber || !name || !title || !description) {
+				alert('Please fill in all fields before submitting.');
+				return;
+			}
+
+			createTrelloCard(title, description);
+
+			// Redirect to the success page
+			window.location.href = 'success.html?regIdNumber=' + encodeURIComponent(regIdNumber) + '&name=' + encodeURIComponent(name) + '&surname=' + encodeURIComponent(surname) + '&dniNiePassportNumber=' + encodeURIComponent(dniNiePassportNumber) + '&termsAndConditions=' + encodeURIComponent(termsAndConditions) + '&linkValidDuration=' + encodeURIComponent(linkValidDuration);
+		});
+
+		function createTrelloCard(title, description){
+			const apiKey = "7e3b3ffb7ab3742dc8733ab29a1e5c61";
+			const token = "ATTA9dafe8804499694699b00d7b289c5001efe14e6bd61ab73c6e335883990c1dbdA4A05CB4";
+
+			fetch('https://api.trello.com/1/cards?idList=666b0606093496e277de3052&name='+title+'&desc='+description+'&key='+apiKey+'&token='+token, {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json'
+			}
+			})
+			.then(response => {
+				console.log(
+				`Response: ${response.status} ${response.statusText}`
+				);
+				alert('Your issue has been created.');
+				return response.text();
+			})
+			.then(text => console.log(text))
+			.catch(err => console.error(err));
+		}
+	</script>
+</body>
+
+</html>

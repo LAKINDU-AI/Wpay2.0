@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<head>
+	<title>Payment Link Generator</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+		}
+
+		.container {
+			max-width: 600px;
+			margin: 0 auto;
+			padding: 20px;
+			border: 1px solid #ccc;
+			box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+		}
+
+		.form-group {
+			margin-bottom: 20px;
+		}
+
+		label {
+			display: block;
+			margin-bottom: 5px;
+		}
+
+		input[type="text"],
+		input[type="number"] {
+			width: 100%;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		select {
+			width: 100%;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		button {
+			background-color: #4CAF50;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			display: block;
+			margin: 0 auto;
+		}
+
+		button:hover {
+			background-color: #45a049;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Payment Link Generator</h1>
+		<form id="payment-form">
+			<div class="form-group">
+				<label for="reg-id-number">Reg / ID Number:</label>
+				<input type="number" id="reg-id-number" name="reg-id-number">
+			</div>
+			<div class="form-group">
+				<label for="name">Name:</label>
+				<input type="text" id="name" name="name">
+			</div>
+			<div class="form-group">
+				<label for="surname">Surname:</label>
+				<input type="text" id="surname" name="surname">
+			</div>
+			<div class="form-group">
+				<label for="dni-nie-passport-number">Passport Number:</label>
+				<input type="text" id="dni-nie-passport-number" placeholder="ex. K1234567" name="dni-nie-passport-number">
+			</div>
+			<div class="form-group">
+				<label for="terms-and-conditions">Agree to Terms and Conditions:</label>
+				<input type="checkbox" id="terms-and-conditions" name="terms-and-conditions">
+			</div>
+			<div class="form-group">
+				<label for="link-valid-duration">Link Valid Duration:</label>
+				<select id="link-valid-duration" name="link-valid-duration">
+					<option value="1">1 Hour</option>
+					<option value="6">6 Hours</option>
+					<option value="24">24 Hours</option>
+				</select>
+			</div>
+			<button type="submit">Generate</button>
+		</form>
+	</div>
+	<script>
+		const form = document.getElementById('payment-form');
+		const dniNiePassportNumberForm = document.getElementById('dni-nie-passport-number');
+
+
+		form.addEventListener('submit', (e) => {
+			e.preventDefault();
+			const regIdNumber = document.getElementById('reg-id-number').value;
+			const name = document.getElementById('name').value;
+			const surname = document.getElementById('surname').value;
+			const dniNiePassportNumber = document.getElementById('dni-nie-passport-number').value;
+			const termsAndConditions = document.getElementById('terms-and-conditions').checked;
+			const linkValidDuration = document.getElementById('link-valid-duration').value;
+
+			if (!regIdNumber || !name || !surname || !dniNiePassportNumber || !termsAndConditions || !linkValidDuration) {
+				alert('Please fill in all fields and agree to the terms and conditions before generating the payment link.');
+				return;
+			}
+
+			validateNIE(dniNiePassportNumber);
+
+			// Perform any necessary validation or processing here
+
+
+
+			// Redirect to the success page
+			window.location.href = 'success.html?regIdNumber=' + encodeURIComponent(regIdNumber) + '&name=' + encodeURIComponent(name) + '&surname=' + encodeURIComponent(surname) + '&dniNiePassportNumber=' + encodeURIComponent(dniNiePassportNumber) + '&termsAndConditions=' + encodeURIComponent(termsAndConditions) + '&linkValidDuration=' + encodeURIComponent(linkValidDuration);
+		});
+
+		dniNiePassportNumberForm.addEventListener('blur', (e) => {
+			e.preventDefault();
+			validateNIE(dniNiePassportNumberForm.value);
+		});
+
+		function validateNIE(input){
+			if(input){
+				if(!validateInput(input, "^[A-Z][0-9]{8}$")){
+					alert('Incorrect format for field: DNI/NIE/Passport');
+					return;
+				}
+			}
+		}
+
+		function validateInput(input, regex) {
+    		const pattern = new RegExp(regex);
+    		return pattern.test(input);
+		}
+	</script>
+</body>
+
+</html>
+
+
+<!--<script>
+    const form = document.getElementById('payment-form');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const regIdNumber = document.getElementById('reg-id-number').value;
+        const name = document.getElementById('name').value;
+        const surname = document.getElementById('surname').value;
+        const dniNiePassportNumber = document.getElementById('dni-nie-passport-number').value;
+        const termsAndConditions = document.getElementById('terms-and-conditions').checked;
+        const linkValidDuration = document.getElementById('link-valid-duration').value;
+
+        if (!regIdNumber || !name || !surname || !dniNiePassportNumber || !termsAndConditions || !linkValidDuration) {
+            alert('Please fill in all fields and agree to the terms and conditions before generating the payment link.');
+            return;
+        }
+
+        try {
+            const response = await fetch('process_form.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json', // Use 'application/x-www-form-urlencoded' if using FormData
+                },
+                body: JSON.stringify({
+                    regIdNumber,
+                    name,
+                    surname,
+                    dniNiePassportNumber,
+                    termsAndConditions,
+                    linkValidDuration,
+                }),
+            });
+
+            if (response.ok) {
+                // Handle success (optional)
+                console.log('Form submitted successfully');
+                // You can also redirect to a success page if needed
+            } else {
+                // Handle errors
+                console.error('Failed to submit form:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error during form submission:', error);
+        }
+    });
+</script>

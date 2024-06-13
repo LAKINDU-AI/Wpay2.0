@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Hub</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1em;
+    }
+
+    nav {
+      background-color: #0066cc;
+      padding: 1em;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1em;
+      font-size: 18px;
+    }
+
+    section {
+      padding: 2em;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    p {
+      line-height: 1.6;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1em;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Developer Hub</h1>
+    <p>Your go-to resource for all things development!</p>
+  </header>
+
+  <nav>
+    <a href="#operation">Getting Started</a>
+    <a href="#languages">Programming Languages</a>
+    <a href="#tools">Development Tools</a>
+    <a href="#resources">Resources</a>
+  </nav>
+
+  <section id="operation">
+    <h2 class="subtitulo-desa wow fadeInLeft">
+      Operation
+      </h3>
+      <p>This type of payment is basically two phases.</p>
+      <ul>
+        <li>
+          <p><strong data-moz-translations-id="0">Phase 1:</strong> At this stage trade connects
+            with the TPV-Virtual and request to make a Paygold payment. In this
+            trading must indicate the telephone number or the
+            email to which you wish to send the URL
+            later. After receiving that solitude, the TPV-Virtual
+            store the petition and send the SMS or mail to the holder
+            Electronic with the URL.</p>
+          <p>Trade may make the Paygold payment request
+            by requesting REST or through the <a href="portalAdministracion.html#paygold-modulo"
+              data-moz-translations-id="0">portal of
+              - Administration</a>.</p>
+        </li>
+        <li>
+          <p><strong data-moz-translations-id="0">Second phase:</strong> In this second phase, the headline
+            makes the payment through the URL provided. Inside
+            of this URL the holder shall proceed to enter the
+            card and to make your authentication if necessary.</p>
+        </li>
+      </ul>
+      <h2>Operation</h2>
+      <p>Welcome to Developer Hub! Whether you're a seasoned developer or just getting started, we have the resources
+        you need to level up your skills. Explore our guides, tutorials, and tips to enhance your development journey.
+      </p>
+  </section>
+  <!--HEEEEEEEEEEEEEEEEEEEEE-->
+  <div id="descripcion">
+    <img src="paygold.png" class="infografia-full grande">
+    <p>The general flow of Paygold payment is the
+      the following:</p>
+    <!--<img alt="flujo paygold" class="imagen-grafico" src="img/flujo-paygold.png"> -->
+    <ol>
+      <li>The trade user requests the payment of a
+        certain amount through the virtual TPV. In this request
+        the telephone number of the holder or address of the
+        e-mail as the case is case.</li>
+      <li>The virtual TPV sends an SMS (or e-mail) with a link to the
+        card holder.</li>
+      <li>The headline clicks on the link and connects to the virtual TPV
+        to enter the payment details (legged, expiration and cvv2).
+        The validity of an operation is not limited, but it is
+        possible to configure the validity time that the client has
+        to make the payment.</li>
+      <li>The virtual TPV contacts the financial institution that has
+        That card was issued.</li>
+      <li>If it has established, the issuing entity requests
+        authentication to the card holder.</li>
+      <li>The virtual TPV requests authorization from the entity
+        broadcast on traditional payment media circuits.</li>
+      <li>Optionally, the virtual TPV sends a notification
+        On-Line to the trade server with the result of the
+        - I'm running.</li>
+      <li>Finally, the virtual TPV SIS shows the receipt of the
+        operation to the card holder.</li>
+    </ol>
+  </div>
+
+  <div id="parametrosPaygold" style="padding-top: 5%">
+    <h3 class="subtitulo-desa wow fadeInLeft">PayGold Parameters</h3>
+    <p>To perform this type of operation via <a href="conexion-rest.html" data-moz-translations-id="0">REST</a>, it is
+      necessary that the
+      trade
+      make a request to the TPV-Virtual. After making this request,
+      the TPV-Virtual shall perform the necessary validations and in function
+      of these validations will send a message of reply to the
+      - Trade.</p>
+    <p>To use this functionality, it is necessary to indicate
+      some fields that are shown below:</p>
+    <ul>
+      <li> <b data-moz-translations-id="0">Ds-Merchant-TransactionType:</b> This field indicates
+        that the type of operation is Paygold, the value of the parameter is
+        "F".</li>
+      <li> <b data-moz-translations-id="0">Ds.Merchant-Customer-Mobile:</b> To report the
+        the header's phone number to send the SMS to the link.</li>
+      <li> <b data-moz-translations-id="0">Ds.Merchant-Customer-Mail:</b> To report the
+        email address of the holder to send the link.</li>
+      <li> <b data-moz-translations-id="0">Ds-Merchant-P2F-ExpiryDate:</b> Allows to specify
+        the expiry date of the link being possible to specify the
+        date of each operation using this parameter. The value of the
+        field may be the number of minutes from the operation or the
+        date and exact expiry date with the following format:
+        aaaa-mm-dd-H.H.MMss.sss (e.g. 2014-08-06-16.31.35.318).</li>
+      <li> <b data-moz-translations-id="0">Ds.Merchant-Customer-Sms-Text:</b> Customization of
+        SMS messages sent to the user. This field will contain a
+        text chain with the relevant fields between arrobas, is
+        obligatory to always include the URL (URL). The data between
+        arrobas shall be replaced by the corresponding values.</li>
+      <li><b>Ds.Merchant-P2F-XMLData:</b>Customization of
+        emails sent. This field allows TAGs to pass for
+        the personalization. It is important to escape the symbols and /
+        for their corresponding html code as well as leave them inside the
+        CDATA. The fields that include this parameter are:<ul>
+          <li>name Purchaser: The name of the buyer. No
+            character limitation.</li>
+          <li>AddressBuyer: The buyer's address. No
+            character limitation.</li>
+          <li>textLibre1: The text to be included describing the
+            buy. No character limitation.</li>
+          <li>SubjectMailClient: Subject of the personalized e-mail.</li>
+        </ul>
+      </li>
+    </ul>The request to the SIS virtual TPV shall be made by sending
+    REST requests to the following addresses depending on the
+    working environment:<br><br>
+
+    <table style="width: 600px" class="center table table-striped errores-sis">
+      <thead>
+        <tr>
+          <th>Environment</th>
+          <th>URL connection</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+
+          <td>Tests</td>
+          <td>https://sis-t.redsys.es:25443/sis/rest/trataPetitionREST</td>
+        </tr>
+        <tr>
+          <td>Real</td>
+          <td>https://sis.redsys.es/sis/rest/trataPetitionREST</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+  <footer>
+    <p>&copy; 2024 Developer Hub. All rights reserved.</p>
+  </footer>
+</body>
+
+</html>
