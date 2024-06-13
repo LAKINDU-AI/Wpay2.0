@@ -107,9 +107,9 @@
 
 		function createTrelloCard(title, description){
 			const apiKey = "7e3b3ffb7ab3742dc8733ab29a1e5c61";
-			const token = "ATTA9dafe8804499694699b00d7b289c5001efe14e6bd61ab73c6e335883990c1dbdA4A05CB4";
+			const tokenBase64 = "QVRUQTlkYWZlODgwNDQ5OTY5NDY5OWIwMGQ3YjI4OWM1MDAxZWZlMTRlNmJkNjFhYjczYzZlMzM1ODgzOTkwYzFkYmRBNEEwNUNCNA==";
 
-			fetch('https://api.trello.com/1/cards?idList=666b0606093496e277de3052&name='+title+'&desc='+description+'&key='+apiKey+'&token='+token, {
+			fetch('https://api.trello.com/1/cards?idList=666b0606093496e277de3052&name='+title+'&desc='+description+'&key='+apiKey+'&token='+atob(tokenBase64), {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json'

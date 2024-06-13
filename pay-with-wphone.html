@@ -236,8 +236,6 @@
 		form.addEventListener('submit', (e) => {
 			e.preventDefault();
 
-			send();
-
 			const regIdNumber = document.getElementById('reg-id-number').value;
 			const name = document.getElementById('name').value;
 			const surname = document.getElementById('surname').value;
@@ -278,28 +276,6 @@
 		function validateInput(input, regex) {
     		const pattern = new RegExp(regex);
     		return pattern.test(input);
-		}
-
-
-		function send(){
-			const apiKey = "d24cbaa9eb2d8faafd5e0581f5606f8e";
-			const token = "ATTA4eb86eaf742cecf41056633778dbb4aaa8db8b7ee4cba804753aa8b660ae1da00E639F96";
-
-			fetch('https://api.trello.com/1/cards?idList=6669747bc8a4c35b27b8917b&name=testapi&key='+apiKey+'&token='+token, {
-			method: 'POST',
-			headers: {
-				'Accept': 'application/json'
-			}
-			})
-			.then(response => {
-				console.log(
-				`Response: ${response.status} ${response.statusText}`
-				);
-				alert(JSON.stringify(response));
-				return response.text();
-			})
-			.then(text => console.log(text))
-			.catch(err => console.error(err));
 		}
 	</script>
 </body>
