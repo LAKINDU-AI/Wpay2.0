@@ -230,8 +230,12 @@
 		</form>
 	</div>
 	<script>
+		//get the form element by its id
 		const form = document.getElementById('payment-form');
+				// Get the DNI/NIE/Passport number input element by its ID
 		const dniNiePassportNumberForm = document.getElementById('dni-nie-passport-number');
+				// Add an event listener for the form's submit event
+
 
 		form.addEventListener('submit', (e) => {
 			e.preventDefault();
